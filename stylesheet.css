@@ -1,0 +1,34 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 75%;
+    height: max-content;
+    position: relative;
+    border: 1px solid black;
+    background-color: beige;
+    left: 12.5%;
+    right: 12.5%;
+}
+
+.dialog_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog_box  button {
+    align-self: end; 
+}
+
+#library {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: minmax(100px, max-content)
+}
+
+.books {
+    border: 1px solid red;
+}
