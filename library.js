@@ -85,11 +85,11 @@ function createLibrary(library) {
     let container = createDiv();
 
     for (let i = 0; i < library.length; i++) {
-        
+
+        let buttonsDiv = createDiv();
         let bookDiv = createDiv();
         let deleteButton = createButton("button", "Delete book");
         let setStatusButton = createButton("button", `Set to ${library[i].oppositeStatus()}`);
-        // bookDiv.setAttribute("id", i);
         bookDiv.setAttribute("class", "books")
 
         deleteButton.addEventListener("click", function() {
@@ -103,19 +103,26 @@ function createLibrary(library) {
             updateLibrary(myLibrary);
         })
 
-        bookDiv.appendChild(setStatusButton);
+        buttonsDiv.appendChild(setStatusButton);
 
         for (let prop in library[i]) {
 
             if(library[i].hasOwnProperty(prop)) {
                 let p = createParagraph();
                 p.setAttribute("class", prop.toString());
-                p.textContent += `${prop}: ${library[i][prop]}`;
+                if(!(prop === "Status")) {
+                    p.textContent += `${prop}: ${library[i][prop]}`;
+                } else {
+                    p.textContent += `${library[i]["Status"]}`;
+                }
+                
                 bookDiv.appendChild(p);
             }
             
         }
-        bookDiv.appendChild(deleteButton);
+        buttonsDiv.appendChild(deleteButton);
+        buttonsDiv.setAttribute("class", "booksButtons");
+        bookDiv.appendChild(buttonsDiv);
         container.appendChild(bookDiv);
         
     }
@@ -134,6 +141,7 @@ function dialogBox() {
 
     let container = createDiv();
     container.setAttribute("class", "dialog_box");
+    let inputFields = createDiv();
 
     let openButton = createButton("button", "Add new book");
     let closeButton = createButton("button", "X");
@@ -164,11 +172,12 @@ function dialogBox() {
         dialog.close();
     })
 
-    let parents = [dialog, container]
+    let parents = [inputFields, dialog, container]
     let children1 = [closeButton, titleField, authorField, pageField, genreField, submitButton];
-    let children2 = [openButton, dialog];
+    let children2 = [inputFields];
+    let children3 = [openButton, dialog];
 
-    appendChildrenToParents(parents, [children1, children2]);
+    appendChildrenToParents(parents, [children1, children2, children3]);
 
     return container;
 }
