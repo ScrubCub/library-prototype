@@ -1,28 +1,32 @@
 const myLibrary = [];
 const body = document.querySelector("body");
 
-function Book(title, author, pages, genre, read = "Unread") {
-    this.Title = title;
-    this.Author = author;
-    this.Pages = pages;
-    this.Genre = genre;
-    this.Status = read;
-}
-
-Book.prototype.switchStatus = function(){
-    if (this.Status == "Unread") {
-        this.Status = "Read";
-    } else if (this.Status == "Read") {
-        this.Status = "Unread";
+class Book {
+    constructor(title, author, pages, genre, read = 'Unread') {
+        this.Title = title;
+        this.Author = author;
+        this.Pages = pages;
+        this.Genre = genre;
+        this.Status = read;
     }
-}
 
-Book.prototype.oppositeStatus = function() {
-    if (this.Status == "Unread") {
-        return "Read";
-    } else if (this.Status == "Read") {
-        return "Unread";
+    switchStatus() {
+        if (this.Status == "Unread") {
+            this.Status = "Read";
+        } else if (this.Status == "Read") {
+            this.Status = "Unread";
+        }
     }
+
+    oppositeStatus() {
+        if (this.Status == "Unread") {
+            return "Read";
+        } else if (this.Status == "Read") {
+            return "Unread";
+        }
+    }
+
+
 }
 
 function addBookToLibrary(title, author, pages, genre, library) {
@@ -73,12 +77,6 @@ function appendChildrenToParents(parents, children) {
         }
     }
 }
-
-// function setAllAttribute(element, attributes) {
-//     for(let attribute in attributes) {
-//         element.setAttribute(attribute, attributes[attributes])
-//     }
-// }
 
 function createLibrary(library) {
 
